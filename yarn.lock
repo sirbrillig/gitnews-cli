@@ -492,6 +492,13 @@ get-stdin@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/get-stdin/-/get-stdin-4.0.1.tgz#b968c6b0a04384324902e8bf1a5df32579a450fe"
 
+gitnews@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/gitnews/-/gitnews-1.0.0.tgz#cbeb6ae2e917eac751df806a6930037cbb52e4ef"
+  dependencies:
+    lodash.get "^4.4.2"
+    node-fetch "^1.6.3"
+
 glob@^7.0.0, glob@^7.0.3, glob@^7.0.5:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.1.tgz#805211df04faaf1c63a3600306cdf5ade50b2ec8"
