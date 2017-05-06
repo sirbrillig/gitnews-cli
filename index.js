@@ -67,6 +67,11 @@ function printNotifications( notifications ) {
 }
 
 function printError( err ) {
+	if ( err === 'GitHub token is not available' ) {
+		printError( chalk.yellow( 'You do not have a GitHub token configured.' ) );
+		printError( chalk.yellow( 'Please Generate one at https://github.com/settings/tokens' ) );
+		printError( chalk.green( 'Once you have a token, run `gitnews --save-token`' ) );
+	}
 	console.error( err );
 }
 
