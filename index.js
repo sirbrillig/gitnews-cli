@@ -6,7 +6,6 @@ const date = require( 'date-fns' );
 const meow = require( 'meow' );
 const inquirer = require( 'inquirer' );
 const Conf = require( 'conf' );
-const columnify = require( 'columnify' );
 const { getNotifications, setLogger } = require( 'gitnews' );
 
 const config = new Conf();
@@ -46,12 +45,13 @@ function output( line ) {
 	console.log( line );
 }
 
+function outputRow( noteData ) {
+	const columns = [ 'date', 'repo', 'title', 'urlSeparator', 'url' ];
+	output( columns.map( columnName => noteData[ columnName ] ).join( ' ' ) );
+}
+
 function outputColumns( data ) {
-	const options = {
-		columns: [ 'date', 'repo', 'title', 'urlSeparator', 'url' ],
-		showHeaders: false,
-	};
-	output( columnify( data, options ) );
+	data.map( outputRow );
 }
 
 function getFormattedNotifications( notifications ) {
