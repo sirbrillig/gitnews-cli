@@ -7,7 +7,7 @@ const meow = require( 'meow' );
 const inquirer = require( 'inquirer' );
 const Conf = require( 'conf' );
 const columnify = require( 'columnify' );
-const { getNotifications, setLogger } = require( 'gitnews' );
+const { getNotifications, getReadNotifications, setLogger } = require( 'gitnews' );
 
 const config = new Conf();
 
@@ -81,6 +81,12 @@ function fetchAndPrintNotifications() {
 		.catch( printError );
 }
 
+function fetchAndPrintReadNotifications() {
+	getReadNotifications( getToken() )
+		.then( printNotifications )
+		.catch( printError );
+}
+
 function saveToken( token ) {
 	config.set( 'token', token );
 }
@@ -97,6 +103,7 @@ const cli = meow( `
 
 	Options:
 		--save-token  Prompt for the token and save it.
+		--read        Show read notifications instead of unread.
 		--verbose     Say what we're doing.
 ` );
 
@@ -110,6 +117,8 @@ if ( cli.flags.saveToken ) {
 	// TODO: verify the token before saving
 		.then( input => saveToken( input.token ) )
 		.then( () => output( chalk.green( 'The token was saved! Now you can run gitnews to get your notifications.' ) ) );
+} else if ( cli.flags.read ) {
+	fetchAndPrintReadNotifications();
 } else {
 	fetchAndPrintNotifications();
 }
