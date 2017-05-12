@@ -1,6 +1,14 @@
-# gitnews
+# gitnews-cli
 
 A simple CLI tool to see your GitHub notifications.
+
+# Install
+
+Via npm:
+
+```
+$ npm i -g gitnews-cli
+```
 
 # Usage
 
