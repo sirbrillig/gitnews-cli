@@ -19,3 +19,9 @@ $ gitnews
 ```
 
 to fetch and display your notifications.
+
+If you want to see messages you've already read, you can pass the `--read` option:
+
+```
+$ gitnews --read
+```
