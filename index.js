@@ -32,12 +32,18 @@ function getTitle( notification ) {
 	return get( notification, 'subject.title', '' );
 }
 
+function truncateString( string, length ) {
+	if ( string.length <= length ) {
+		return string;
+	}
+	return string.substr( 0, length - 1 ) + '…';
+}
+
 function getFormattedNotification( note ) {
 	return {
 		date: chalk.bold.yellow( getDate( note ) + ': ' ),
-		repo: chalk.green( '(' + getRepo( note ) + ') ' ),
-		title: getTitle( note ),
-		urlSeparator: ' -- ',
+		repo: chalk.green( '(' + truncateString( getRepo( note ), 25 ) + ') ' ),
+		title: truncateString( getTitle( note ), 50 ),
 		url: chalk.green( getUrl( note ) ),
 	};
 }
@@ -48,7 +54,7 @@ function output( line ) {
 
 function outputColumns( data ) {
 	const options = {
-		columns: [ 'date', 'repo', 'title', 'urlSeparator', 'url' ],
+		columns: [ 'date', 'repo', 'title', 'url' ],
 		showHeaders: false,
 	};
 	output( columnify( data, options ) );
