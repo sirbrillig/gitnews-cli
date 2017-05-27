@@ -83,15 +83,16 @@ function printError( err ) {
 
 function fetchAndPrintNotifications() {
 	getNotifications( getToken() )
+		.then( notes => notes.filter( note => note.unread ) )
 		.then( printNotifications )
 		.catch( printError );
 }
 
 function fetchAndPrintReadNotifications() {
-	// TODO
-	//getReadNotifications( getToken() )
-		//.then( printNotifications )
-		//.catch( printError );
+	getNotifications( getToken() )
+		.then( notes => notes.filter( note => ! note.unread ) )
+		.then( printNotifications )
+		.catch( printError );
 }
 
 function saveToken( token ) {
