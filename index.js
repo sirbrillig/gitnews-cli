@@ -12,7 +12,7 @@ const { getNotifications, setLogger } = require( 'gitnews' );
 const config = new Conf();
 
 function getUrl( note ) {
-	return get( note, 'subjectUrl', '' );
+	return get( note, 'commentUrl', '' );
 }
 
 function getDate( note ) {
