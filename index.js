@@ -7,29 +7,29 @@ const meow = require( 'meow' );
 const inquirer = require( 'inquirer' );
 const Conf = require( 'conf' );
 const columnify = require( 'columnify' );
-const { getNotifications, getReadNotifications, setLogger } = require( 'gitnews' );
+const { getNotifications, setLogger } = require( 'gitnews' );
 
 const config = new Conf();
 
-function getUrl( notification ) {
-	return get( notification, 'html_url', '' );
+function getUrl( note ) {
+	return get( note, 'subjectUrl', '' );
 }
 
-function getDate( notification ) {
+function getDate( note ) {
 	const now = Date.now();
 	return date.distanceInWords(
 		now,
-		date.parse( get( notification, 'updated_at', '' ) ),
+		date.parse( get( note, 'updatedAt', '' ) ),
 		{ addSuffix: true }
 	);
 }
 
-function getRepo( notification ) {
-	return get( notification, 'repository.full_name', '' );
+function getRepo( note ) {
+	return get( note, 'repositoryFullName', '' );
 }
 
-function getTitle( notification ) {
-	return get( notification, 'subject.title', '' );
+function getTitle( note ) {
+	return get( note, 'title', '' );
 }
 
 function truncateString( string, length ) {
@@ -88,9 +88,10 @@ function fetchAndPrintNotifications() {
 }
 
 function fetchAndPrintReadNotifications() {
-	getReadNotifications( getToken() )
-		.then( printNotifications )
-		.catch( printError );
+	// TODO
+	//getReadNotifications( getToken() )
+		//.then( printNotifications )
+		//.catch( printError );
 }
 
 function saveToken( token ) {
