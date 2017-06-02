@@ -33,3 +33,7 @@ If you want to see messages you've already read, you can pass the `--read` optio
 ```
 $ gitnews --read
 ```
+
+# Related
+
+Built using [gitnews](https://github.com/sirbrillig/gitnews) to fetch the notifications. If you want a similar app for your menubar, check out [gitnews-menubar](https://github.com/sirbrillig/gitnews-menubar).
