@@ -1,6 +1,6 @@
 {
   "name": "gitnews-cli",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "CLI tool to see GitHub notifications",
   "main": "index.js",
   "bin": {
