@@ -7,7 +7,7 @@ const meow = require( 'meow' );
 const inquirer = require( 'inquirer' );
 const Conf = require( 'conf' );
 const columnify = require( 'columnify' );
-const { getNotifications, setLogger } = require( 'gitnews' );
+const { makeNotificationGetter } = require( 'gitnews' );
 
 const config = new Conf();
 
@@ -81,14 +81,14 @@ function printError( err ) {
 	console.error( err );
 }
 
-function fetchAndPrintNotifications() {
+function fetchAndPrintNotifications( getNotifications ) {
 	getNotifications( getToken() )
 		.then( notes => notes.filter( note => note.unread ) )
 		.then( printNotifications )
 		.catch( printError );
 }
 
-function fetchAndPrintReadNotifications() {
+function fetchAndPrintReadNotifications( getNotifications ) {
 	getNotifications( getToken() )
 		.then( notes => notes.filter( note => ! note.unread ) )
 		.then( printNotifications )
@@ -115,9 +115,13 @@ const cli = meow( `
 		--verbose     Say what we're doing.
 ` );
 
+const options = {};
+
 if ( cli.flags.verbose ) {
-	setLogger( output );
+	options.log = output;
 }
+
+const getNotifications = makeNotificationGetter( options );
 
 if ( cli.flags.saveToken ) {
 	output( chalk.yellow( 'Please Generate a token at https://github.com/settings/tokens' ) );
@@ -126,7 +130,7 @@ if ( cli.flags.saveToken ) {
 		.then( input => saveToken( input.token ) )
 		.then( () => output( chalk.green( 'The token was saved! Now you can run gitnews to get your notifications.' ) ) );
 } else if ( cli.flags.read ) {
-	fetchAndPrintReadNotifications();
+	fetchAndPrintReadNotifications( getNotifications );
 } else {
-	fetchAndPrintNotifications();
+	fetchAndPrintNotifications( getNotifications );
 }
