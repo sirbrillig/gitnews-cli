@@ -7,7 +7,7 @@ const meow = require( 'meow' );
 const inquirer = require( 'inquirer' );
 const Conf = require( 'conf' );
 const columnify = require( 'columnify' );
-const { makeNotificationGetter } = require( 'gitnews' );
+const { createNoteGetter } = require( 'gitnews' );
 
 const config = new Conf();
 
@@ -121,7 +121,7 @@ if ( cli.flags.verbose ) {
 	options.log = output;
 }
 
-const getNotifications = makeNotificationGetter( options );
+const getNotifications = createNoteGetter( options );
 
 if ( cli.flags.saveToken ) {
 	output( chalk.yellow( 'Please Generate a token at https://github.com/settings/tokens' ) );
