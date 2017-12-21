@@ -110,6 +110,7 @@ const cli = meow( `
 		$ gitnews
 
 	Options:
+		--help        Show this help message.
 		--save-token  Prompt for the token and save it.
 		--read        Show read notifications instead of unread.
 		--verbose     Say what we're doing.
