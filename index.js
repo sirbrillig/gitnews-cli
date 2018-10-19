@@ -73,6 +73,10 @@ function printNotifications( notifications ) {
 }
 
 function printError( err ) {
+	if ( ! err ) {
+		console.error( chalk.red( 'An error occurred but there was no information associated with it!' ) );
+		return;
+	}
 	if ( err.code === 'GitHubTokenNotFound' ) {
 		console.error( chalk.yellow( 'You do not have a GitHub token configured.' ) );
 		console.error( chalk.yellow( 'Please Generate one at https://github.com/settings/tokens' ) );
