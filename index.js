@@ -77,8 +77,27 @@ function printError( err ) {
 		printError( chalk.yellow( 'You do not have a GitHub token configured.' ) );
 		printError( chalk.yellow( 'Please Generate one at https://github.com/settings/tokens' ) );
 		printError( chalk.green( 'Once you have a token, run `gitnews --save-token`' ) );
+		console.error( '' );
+	}
+	if ( isOfflineError( err ) ) {
+		printError( chalk.yellow( 'There seems to be a problem connecting to GitHub. Please try again later.' ) );
+		console.error( '' );
 	}
 	console.error( err );
+}
+
+function getOfflineCodes() {
+	return [];
+}
+
+function isOfflineError( err ) {
+	if ( getOfflineCodes().includes( err.code ) ) {
+		return true;
+	}
+	if ( err.type === 'invalid-json' ) {
+		return true;
+	}
+	return false;
 }
 
 function fetchAndPrintNotifications( getNotifications ) {
