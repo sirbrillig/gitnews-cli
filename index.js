@@ -95,7 +95,15 @@ function printError( err ) {
 }
 
 function getOfflineCodes() {
-	return [];
+	return [
+		'ENETDOWN',
+		'ENOTFOUND',
+		'ETIMEDOUT',
+		'ECONNABORTED',
+		'ECONNRESET',
+		'ENETUNREACH',
+		'Z_BUF_ERROR',
+	];
 }
 
 function isOfflineError( err ) {
