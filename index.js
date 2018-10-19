@@ -74,15 +74,19 @@ function printNotifications( notifications ) {
 
 function printError( err ) {
 	if ( err.code === 'GitHubTokenNotFound' ) {
-		printError( chalk.yellow( 'You do not have a GitHub token configured.' ) );
-		printError( chalk.yellow( 'Please Generate one at https://github.com/settings/tokens' ) );
-		printError( chalk.green( 'Once you have a token, run `gitnews --save-token`' ) );
+		console.error( chalk.yellow( 'You do not have a GitHub token configured.' ) );
+		console.error( chalk.yellow( 'Please Generate one at https://github.com/settings/tokens' ) );
+		console.error( chalk.green( 'Once you have a token, run `gitnews --save-token`' ) );
 		console.error( '' );
+		return;
 	}
 	if ( isOfflineError( err ) ) {
-		printError( chalk.yellow( 'There seems to be a problem connecting to GitHub. Please try again later.' ) );
+		console.error( chalk.yellow( 'There seems to be a problem connecting to GitHub. Please try again later.' ) );
 		console.error( '' );
+		console.error( err );
+		return;
 	}
+	console.error( chalk.red( 'An error occurred!' ) );
 	console.error( err );
 }
 
